@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\BookStore.MVC",
-    "\\BookStore.MVC\\Controllers"
+    "\\BookStore.MVC\\Controllers",
+    "\\BookStore.MVC\\Data"
   ],
-  "SelectedNode": "\\BookStore.MVC\\Controllers\\BookController.cs",
+  "SelectedNode": "\\BookStoreWebApp.sln",
   "PreviewInSolutionExplorer": false
 }

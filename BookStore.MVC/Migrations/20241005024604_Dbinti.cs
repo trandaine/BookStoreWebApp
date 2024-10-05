@@ -3,12 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace BookStore.MVC.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Dbinti : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +18,7 @@ namespace BookStore.MVC.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Position = table.Column<int>(type: "int", nullable: false)
@@ -36,8 +34,8 @@ namespace BookStore.MVC.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Alias = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Alias = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     Position = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -46,19 +44,19 @@ namespace BookStore.MVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Medias",
+                name: "Media",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Alias = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Alias = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     FileName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     Extension = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Position = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Medias", x => x.Id);
+                    table.PrimaryKey("PK_Media", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,8 +65,8 @@ namespace BookStore.MVC.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Alias = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Alias = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MediaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -90,47 +88,11 @@ namespace BookStore.MVC.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Books_Medias_MediaId",
+                        name: "FK_Books_Media_MediaId",
                         column: x => x.MediaId,
-                        principalTable: "Medias",
+                        principalTable: "Media",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Authors",
-                columns: new[] { "Id", "DateOfBirth", "Email", "FullName", "Name", "Phone", "Position" },
-                values: new object[,]
-                {
-                    { new Guid("5a8755fc-85d9-4ea3-8be9-80eae8455b0c"), new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "test@gmali.com", "Default", "default", "0123456789", 0 },
-                    { new Guid("9f81b5cf-2997-4830-9301-b18538fe6d0a"), new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "test@gmali.com", "Default", "default", "0123456789", 0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Books",
-                columns: new[] { "Id", "Alias", "AuthorId", "CategoryId", "DateCreated", "Description", "MediaId", "Title" },
-                values: new object[,]
-                {
-                    { new Guid("a20e8d43-7429-4622-968d-7e038d383a0d"), "default", new Guid("00000000-0000-0000-0000-000000000000"), new Guid("00000000-0000-0000-0000-000000000000"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Default book", new Guid("00000000-0000-0000-0000-000000000000"), "Default" },
-                    { new Guid("f125e7ff-5619-460b-9626-83a87b68c208"), "default", new Guid("00000000-0000-0000-0000-000000000000"), new Guid("00000000-0000-0000-0000-000000000000"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Default book", new Guid("00000000-0000-0000-0000-000000000000"), "Default" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "Alias", "Description", "Name", "Position" },
-                values: new object[,]
-                {
-                    { new Guid("39420626-51ef-4dfb-ac5b-e5846a2b3085"), "default", "Default category", "Default", 1 },
-                    { new Guid("ea5d9119-294b-40d1-bcde-f66ab255d2de"), "default", "Default category", "Default", 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Medias",
-                columns: new[] { "Id", "Alias", "Extension", "FileName", "Name", "Position" },
-                values: new object[,]
-                {
-                    { new Guid("5774ad9e-e87c-4620-9d2e-3e62a410ca5d"), "default", ".jpg", "default.jpg", "Default", 1 },
-                    { new Guid("e7176f36-5a11-40e1-a5e1-31a7451d850e"), "default", ".jpg", "default.jpg", "Default", 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -162,7 +124,7 @@ namespace BookStore.MVC.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Medias");
+                name: "Media");
         }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.MVC.Migrations
 {
     [DbContext(typeof(BookStoreDbContext))]
-    [Migration("20241002092239_init")]
-    partial class init
+    [Migration("20241005024604_Dbinti")]
+    partial class Dbinti
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace BookStore.MVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -60,28 +60,6 @@ namespace BookStore.MVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Authors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("5a8755fc-85d9-4ea3-8be9-80eae8455b0c"),
-                            DateOfBirth = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "test@gmali.com",
-                            FullName = "Default",
-                            Name = "default",
-                            Phone = "0123456789",
-                            Position = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("9f81b5cf-2997-4830-9301-b18538fe6d0a"),
-                            DateOfBirth = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "test@gmali.com",
-                            FullName = "Default",
-                            Name = "default",
-                            Phone = "0123456789",
-                            Position = 0
-                        });
                 });
 
             modelBuilder.Entity("BookStore.MVC.Data.Entities.Book", b =>
@@ -91,7 +69,6 @@ namespace BookStore.MVC.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Alias")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -105,7 +82,6 @@ namespace BookStore.MVC.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("MediaId")
@@ -125,30 +101,6 @@ namespace BookStore.MVC.Migrations
                     b.HasIndex("MediaId");
 
                     b.ToTable("Books");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("a20e8d43-7429-4622-968d-7e038d383a0d"),
-                            Alias = "default",
-                            AuthorId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            CategoryId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Default book",
-                            MediaId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Default"
-                        },
-                        new
-                        {
-                            Id = new Guid("f125e7ff-5619-460b-9626-83a87b68c208"),
-                            Alias = "default",
-                            AuthorId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            CategoryId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Default book",
-                            MediaId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Default"
-                        });
                 });
 
             modelBuilder.Entity("BookStore.MVC.Data.Entities.Category", b =>
@@ -158,12 +110,10 @@ namespace BookStore.MVC.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Alias")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -178,24 +128,6 @@ namespace BookStore.MVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ea5d9119-294b-40d1-bcde-f66ab255d2de"),
-                            Alias = "default",
-                            Description = "Default category",
-                            Name = "Default",
-                            Position = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("39420626-51ef-4dfb-ac5b-e5846a2b3085"),
-                            Alias = "default",
-                            Description = "Default category",
-                            Name = "Default",
-                            Position = 1
-                        });
                 });
 
             modelBuilder.Entity("BookStore.MVC.Data.Entities.Media", b =>
@@ -205,7 +137,6 @@ namespace BookStore.MVC.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Alias")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -229,27 +160,7 @@ namespace BookStore.MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Medias");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("e7176f36-5a11-40e1-a5e1-31a7451d850e"),
-                            Alias = "default",
-                            Extension = ".jpg",
-                            FileName = "default.jpg",
-                            Name = "Default",
-                            Position = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("5774ad9e-e87c-4620-9d2e-3e62a410ca5d"),
-                            Alias = "default",
-                            Extension = ".jpg",
-                            FileName = "default.jpg",
-                            Name = "Default",
-                            Position = 1
-                        });
+                    b.ToTable("Media");
                 });
 
             modelBuilder.Entity("BookStore.MVC.Data.Entities.Book", b =>
