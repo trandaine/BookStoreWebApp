@@ -21,12 +21,10 @@ namespace BookStore.MVC.Data.Configurations
             builder.HasData(
                 new Book
                 {
-                    Id = new System.Guid("f5b3f9c7-7b3d-4b0b-9b3e-2e6d3b3b9e1d"),
+                    Id = Guid.NewGuid(),
                     Title = "Default",
                     Alias = "default",
-                    Description = "Default book",
-                    CategoryId = new System.Guid("f5b3f9c7-7b3d-4b0b-9b3e-2e6d3b3b9e1d"),
-                    AuthorId = new System.Guid("f5b3f9c7-7b3d-4b0b-9b3e-2e6d3b3b9e1d")
+                    Description = "Default book"                    
                 });
         }
     }

@@ -19,11 +19,12 @@ namespace BookStore.MVC.Data.Configurations
             builder.HasData(
                 new Author
                 {
-                    Id = new System.Guid("f5b3f9c7-7b3d-4b0b-9b3e-2e6d3b3b9e1d"),
+                    Id = Guid.NewGuid(),
                     FullName = "Default",
                     Name = "default",
                     DateOfBirth = new System.DateTime(2021, 1, 1),
-                    Phone = "0123456789"
+                    Phone = "0123456789",
+                    Email = "test@gmali.com"
                 });
         }
     }
