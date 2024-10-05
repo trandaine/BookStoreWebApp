@@ -14,18 +14,17 @@ namespace BookStore.MVC.Data.Configurations
                 .IsRequired();
             builder.Property(b => b.Alias)
                 .HasMaxLength(1000);
-            
             builder.HasOne(b => b.Category)
                 .WithMany(c => c.Books)
                 .HasForeignKey(b => b.CategoryId);
-            builder.HasData(
-                new Book
-                {
-                    Id = Guid.NewGuid(),
-                    Title = "Default",
-                    Alias = "default",
-                    Description = "Default book"                    
-                });
+            //builder.HasData(
+            //    new Book
+            //    {
+            //        Id = Guid.NewGuid(),
+            //        Title = "Default",
+            //        Alias = "default",
+            //        Description = "Default book"                    
+            //    });
         }
     }
 }

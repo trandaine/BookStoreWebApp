@@ -14,15 +14,15 @@ namespace BookStore.MVC.Data.Configurations
                 .HasMaxLength(1000);
             builder.Property(c => c.Description)
                 .HasMaxLength(1000);
-            builder.HasData(
-                new Category
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Default",
-                    Alias = "default",
-                    Description = "Default category",
-                    Position = 1
-                });
+            //builder.HasData(
+            //    new Category
+            //    {
+            //        Id = Guid.NewGuid(),
+            //        Name = "Default",
+            //        Alias = "default",
+            //        Description = "Default category",
+            //        Position = 1
+            //    });
         }
     }
 }

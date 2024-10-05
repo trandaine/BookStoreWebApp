@@ -10,6 +10,7 @@ namespace BookStore.MVC.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            OnConfiguring(optionsBuilder);
             var connectionString = Constants.SQL_CONNECTION_STRING;
             optionsBuilder.UseSqlServer(connectionString);
         }
@@ -26,7 +27,7 @@ namespace BookStore.MVC.Data
         public DbSet<Author> Authors { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Book> Books { get; set; }
-        public DbSet<Media> Medias { get; set; }
+        public DbSet<Media> Media { get; set; }
 
     }
 }

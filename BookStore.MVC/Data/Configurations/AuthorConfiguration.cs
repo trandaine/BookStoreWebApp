@@ -16,16 +16,16 @@ namespace BookStore.MVC.Data.Configurations
                 .HasMaxLength(11);
             builder.Property(a => a.Email)
                 .HasMaxLength(200);
-            builder.HasData(
-                new Author
-                {
-                    Id = Guid.NewGuid(),
-                    FullName = "Default",
-                    Name = "default",
-                    DateOfBirth = new System.DateTime(2021, 1, 1),
-                    Phone = "0123456789",
-                    Email = "test@gmali.com"
-                });
+            //builder.HasData(
+            //    new Author
+            //    {
+            //        Id = Guid.NewGuid(),
+            //        FullName = "Default",
+            //        Name = "default",
+            //        DateOfBirth = new System.DateTime(2021, 1, 1),
+            //        Phone = "0123456789",
+            //        Email = "test@gmali.com"
+            //    });
         }
     }
 }

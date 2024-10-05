@@ -10,7 +10,7 @@ namespace BookStore.MVC.Data.Entities
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string Alias { get; set; }
+        public string? Alias { get; set; }
         public string FileName { get; set; }
         public string Extension {  get; set; }
         public int Position { get; set; }
